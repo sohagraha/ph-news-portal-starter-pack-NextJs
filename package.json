@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "json-server": "json-server --watch db.json --port 5000",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,6 +13,7 @@
     "antd": "^5.6.1",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "json-server": "^0.17.3",
     "next": "13.4.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"
