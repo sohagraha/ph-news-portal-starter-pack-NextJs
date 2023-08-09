@@ -98,7 +98,7 @@ const RootLayout = ({ children }) => {
             <LinkedinFilled />
           </Link>
         </p>
-        News Portal ©2023 Created by Programming Hero
+        News Portal ©2023 Created by S R
       </Footer>
     </Layout>
   );
