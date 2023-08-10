@@ -23,6 +23,15 @@ async function run(req, res) {
                 data: allNews,
             });
         }
+        if (req.method === "POST") {
+            const newNews = req.body;
+            const result = await newsCollection.insertOne(newNews);
+            res.send({
+                message: "success",
+                status: 200,
+                data: result,
+            });
+        }
     } finally {
         // await client.close();
     }

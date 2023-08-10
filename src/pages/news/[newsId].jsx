@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 const NewsDetailsPage = ({}) => {
   const router = useRouter();
   const { data, isLoaing, isError, error } = useGetNewsByIdQuery(
-    router.query.newsId
+    Number(router.query.newsId)
   );
   const news = data;
   return (
