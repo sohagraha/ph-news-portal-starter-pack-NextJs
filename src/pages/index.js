@@ -1,12 +1,19 @@
 import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
-import Banner from "@/components/UI/Banner";
 import AllNews from "@/components/UI/AllNews";
 import { useGetNewsesQuery } from "@/redux/api/api";
+import dynamic from 'next/dynamic'
 
 
 const HomePage = ({ allNews }) => {
   const { data, isLoading, isError, error } = useGetNewsesQuery();
+
+  // some icon don't support ssr so we use dynamic import
+  const DynamicBanner = dynamic(() => import('@/components/UI/Banner'), {
+    loading: () => <h1>Loading...</h1>,
+    ssr: false
+  })
+
   return (
     <>
       <Head>
@@ -18,7 +25,8 @@ const HomePage = ({ allNews }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Banner />
+      {/* use lazy loading */}
+      <DynamicBanner />
       <AllNews allNews={data} />
     </>
   );
