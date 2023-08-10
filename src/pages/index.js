@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 
 
 const HomePage = ({ allNews }) => {
-  const { data, isLoading, isError, error } = useGetNewsesQuery();
+  // const { data, isLoading, isError, error } = useGetNewsesQuery();
 
   // some icon don't support ssr so we use dynamic import
   const DynamicBanner = dynamic(() => import('@/components/UI/Banner'), {
@@ -27,7 +27,7 @@ const HomePage = ({ allNews }) => {
       </Head>
       {/* use lazy loading */}
       <DynamicBanner />
-      <AllNews allNews={data} />
+      <AllNews allNews={allNews} />
     </>
   );
 };
@@ -37,14 +37,25 @@ HomePage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
+// export const getServerSideProps = async () => {
+//   const res = await fetch(
+//     "http://localhost:5000/news"
+//   );
+//   const articles = await res.json();
+//   return {
+//     props: {
+//       allNews: articles,
+//     },
+//   };
+// }
 export const getServerSideProps = async () => {
   const res = await fetch(
-    "http://localhost:5000/news"
+    "http://localhost:3000/api/news"
   );
   const articles = await res.json();
   return {
     props: {
-      allNews: articles,
+      allNews: articles?.data || [],
     },
   };
 }
